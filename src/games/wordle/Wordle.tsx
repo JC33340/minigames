@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import { useEffect, useState, useRef } from 'react';
 import axios, { AxiosError } from 'axios';
 import { useNavigate } from 'react-router-dom';
 import WordleDisplay from './WodleDisplay';
@@ -19,7 +19,11 @@ const Wordle = () => {
   const [winStatus, setWinStatus] = useState<'win' | 'lose' | 'pending'>(
     'pending',
   );
+  //storing the current state of the guessed letters in the alphabet
   const [alphabet, setAlphabet] = useState<alphabetType>([]);
+
+  //reference to refocus onto input element after each guess
+  const inputRef = useRef<HTMLInputElement>(null);
 
   const navigate = useNavigate();
 
@@ -117,6 +121,7 @@ const Wordle = () => {
     } else {
       return alert('Enter valid guess');
     }
+    inputRef.current?.focus();
   };
 
   //reloads the window, basically restarting the game
@@ -136,6 +141,7 @@ const Wordle = () => {
       <div className="flex flex-col gap-y-2 items-center">
         <div className="flex gap-x-2">
           <input
+            ref={inputRef}
             disabled={winStatus != 'pending' ? true : false}
             placeholder="Guess"
             maxLength={5}
@@ -146,7 +152,7 @@ const Wordle = () => {
           <button
             disabled={winStatus != 'pending' ? true : false}
             onClick={submitGuess}
-            className="h-fill bg-blue text-white relative font-bold px-4 rounded-2xl hover:opacity-50 transition-all duration-500 ease-in-out "
+            className="h-fill bg-blue border-2 border-blue text-white relative font-bold px-4 rounded-2xl hover:bg-white hover:text-blue transition-all ease-in-out "
           >
             Guess
           </button>

@@ -1,6 +1,7 @@
 import GameCard from './components/GameCard';
 import { GiTicTacToe } from 'react-icons/gi';
 import { TbSquareLetterW } from 'react-icons/tb';
+import { FaBomb } from 'react-icons/fa';
 
 function App() {
   return (
@@ -10,6 +11,9 @@ function App() {
       </GameCard>
       <GameCard title="Wordle" url="/wordle">
         <TbSquareLetterW className="h-full w-full" />
+      </GameCard>
+      <GameCard title="MineSweeper" url="/minesweeper">
+        <FaBomb className="h-full w-full" />
       </GameCard>
     </div>
   );

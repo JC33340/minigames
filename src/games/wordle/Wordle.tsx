@@ -100,12 +100,12 @@ const Wordle = () => {
               newArr[index].status = 'includes';
               return newArr;
             });
-          } else{
-            setAlphabet(prev=>{
-              const newArr = [...prev]
-              newArr[index].status = 'not'
-              return newArr
-            })
+          } else {
+            setAlphabet(prev => {
+              const newArr = [...prev];
+              newArr[index].status = 'not';
+              return newArr;
+            });
           }
         }
       } catch (error) {
@@ -132,7 +132,7 @@ const Wordle = () => {
   }, [guessedWords]);
 
   return (
-    <div className="flex flex items-start justify-center gap-x-8">
+    <div className="flex flex-col-reverse lg:flex-row flex lg:items-start items-center justify-center gap-y-4 gap-x-8">
       <div className="flex flex-col gap-y-2 items-center">
         <div className="flex gap-x-2">
           <input

@@ -21,6 +21,8 @@ const TicTacToe = () => {
   ]);
   const [score, setScore] = useState({ p1: 0, p2: 0 });
   var boxDisplay: ReactElement[] = [];
+  //state for recording if game state is a draw
+  const [isDraw, setIsDraw] = useState(false);
 
   const winCon = [
     [0, 1, 2],
@@ -48,6 +50,7 @@ const TicTacToe = () => {
   }
 
   useEffect(() => {
+    //checking if someone has won yet, occurs every time the state of the box is changed
     for (let i = 0; i < winCon.length; i++) {
       let winCheck: ('' | 'p1' | 'p2')[] = [];
       for (let j = 0; j < winCon[i].length; j++) {
@@ -75,6 +78,11 @@ const TicTacToe = () => {
         }
       }
     }
+    //checking for a draw
+    if (!boxState.includes('') && winner.winner === '') {
+      setIsDraw(true);
+      console.log('draw');
+    }
   }, [boxState]);
 
   function restart() {
@@ -83,41 +91,46 @@ const TicTacToe = () => {
       let newArr: ('' | 'p1' | 'p2')[] = prev.map(item => (item = ''));
       return newArr;
     });
+    setIsDraw(false);
   }
 
   return (
-    <div className="flex flex-col items-center gap-y-8">
+    <div className="flex items-center gap-y-8">
       <div className="flex flex-col lg:flex-row gap-y-4 gap-x-4 items-center">
         <div className="font-bold text-2xl flex flex-row lg:flex-col gap-x-4 gap-y-8">
           <div className="flex items-center gap-x-2">
             <div
-              className={`${turn === 'p1' ? '' : 'opacity-20'} p-8 rounded-xl bg-[#FF4500]`}
+              className={`${turn === 'p1' ? '' : 'opacity-20'} p-4 lg:p-8 rounded-xl bg-[#FF4500]`}
             >
               <p>P1</p>
             </div>
-            <div className="p-8 rounded-xl bg-[#FF4500] opacity-20">
+            <div className="p-4 lg:p-8 rounded-xl bg-[#FF4500] opacity-20">
               <p>{score.p1}</p>
             </div>
           </div>
           <div className="flex items-center gap-x-2">
             <div
-              className={`${turn === 'p2' ? '' : 'opacity-20'} p-8 rounded-xl bg-[#19B5FE]`}
+              className={`${turn === 'p2' ? '' : 'opacity-20'} p-4 lg:p-8 rounded-xl bg-[#19B5FE]`}
             >
               <p>P2</p>
             </div>
-            <div className="p-8 rounded-xl bg-[#19B5FE] opacity-20">
+            <div className="p-4 lg:p-8 rounded-xl bg-[#19B5FE] opacity-20">
               <p>{score.p2}</p>
             </div>
           </div>
         </div>
-        <div className="grid grid-cols-3 grid-rows-3 rounded-2xl overflow-hidden h-[60vh] w-[60vh] relative">
+        <div className="grid grid-cols-3 grid-rows-3 rounded-2xl overflow-hidden h-[15rem] w-[15rem] lg:h-[20rem] lg:w-[20rem] relative">
           <div
-            className={`w-full h-full absolute ${winner.winner != '' ? 'block' : 'hidden'}  backdrop-blur flex flex-col gap-y-3 justify-center items-center`}
+            className={`w-full h-full absolute ${winner.winner != '' || isDraw ? 'block' : 'hidden'}  backdrop-blur-sm flex flex-col gap-y-3 justify-center items-center`}
           >
             <div
-              className={`bg-white py-3 px-4 rounded-xl ${winner.winner === 'p1' ? 'text-[#FF4500]' : 'text-[#19B5FE]'}`}
+              className={`bg-white py-3 px-4 rounded-xl ${isDraw ? 'text-black' : winner.winner === 'p1' ? 'text-[#FF4500]' : 'text-[#19B5FE]'}`}
             >
-              <p>{winner.winner.toLocaleUpperCase()} Wins !</p>
+              <p>
+                {isDraw
+                  ? 'Draw'
+                  : `${winner.winner.toLocaleUpperCase()} Wins !`}
+              </p>
             </div>
             <button
               className="bg-black text-white py-2 px-3 rounded-xl"

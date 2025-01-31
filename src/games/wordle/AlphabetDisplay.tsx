@@ -14,7 +14,8 @@ const AlphabetDisplay = ({
         <Box
           status={i.status}
           letter={i.alphabet.toUpperCase()}
-          className="h-8 w-8 text-sm rounded-md"
+          className="text-sm rounded-md lg:rounded-md"
+          size="sm"
         />,
       );
     }

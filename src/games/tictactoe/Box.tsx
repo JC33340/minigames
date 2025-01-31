@@ -55,9 +55,9 @@ const Box: React.FC<BoxType> = ({
       {boxState[id] === '' ? (
         ''
       ) : boxState[id] === 'p1' ? (
-        <FaRegCircle className="h-20 w-20" />
+        <FaRegCircle className="h-15 w-15 lg:h-20 lg:w-20" />
       ) : (
-        <RxCross2 className="h-20 w-20" />
+        <RxCross2 className="h-15 w-15 lg:h-20 lg:w-20" />
       )}
     </div>
   );

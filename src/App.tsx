@@ -4,7 +4,7 @@ import { TbSquareLetterW } from 'react-icons/tb';
 
 function App() {
   return (
-    <div className="grid grid-cols-3 gap-x-16 justify-items-center">
+    <div className="grid grid-cols-1 lg:grid-cols-3 gap-y-6 gap-x-16 justify-items-center">
       <GameCard title="Tic Tac Toe" url="/tictactoe">
         <GiTicTacToe className="w-full h-full" />
       </GameCard>

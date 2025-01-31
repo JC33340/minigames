@@ -87,8 +87,8 @@ const TicTacToe = () => {
 
   return (
     <div className="flex flex-col items-center gap-y-8">
-      <div className="flex gap-x-4 items-center">
-        <div className="font-bold text-2xl flex flex-col gap-y-8">
+      <div className="flex flex-col lg:flex-row gap-y-4 gap-x-4 items-center">
+        <div className="font-bold text-2xl flex flex-row lg:flex-col gap-x-4 gap-y-8">
           <div className="flex items-center gap-x-2">
             <div
               className={`${turn === 'p1' ? '' : 'opacity-20'} p-8 rounded-xl bg-[#FF4500]`}

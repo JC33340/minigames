@@ -27,7 +27,8 @@ const Wordle = () => {
   useEffect(() => {
     const getWord = async () => {
       const word = await axios
-        .get('https://random-word-api.herokuapp.com/word?number=1&length=5')
+        .get('https://random-word-api.vercel.app/api?words=1&length=5')
+
         .catch(function (error) {
           console.log(error);
           alert('Sorry, Something went wrong');

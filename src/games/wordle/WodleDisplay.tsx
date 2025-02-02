@@ -17,7 +17,6 @@ const WordleDisplay: React.FC<WordleDisplayType> = ({
   for (let i = 0; i < 25; i++) {
     const currentWord = currentGuess.word;
     const start = (currentGuess.guess - 1) * 5;
-    //const wordArr = unknownWord.split('')
     //checking that guess contains the word
     if (i < guessedWords.length * 5) {
       const index = Math.floor(i / 5);

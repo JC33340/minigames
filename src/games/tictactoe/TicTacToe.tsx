@@ -49,39 +49,38 @@ const TicTacToe = () => {
     );
   }
 
+  //win check
   useEffect(() => {
-    //checking if someone has won yet, occurs every time the state of the box is changed
+    let winnerFound = false;
     for (let i = 0; i < winCon.length; i++) {
-      let winCheck: ('' | 'p1' | 'p2')[] = [];
-      for (let j = 0; j < winCon[i].length; j++) {
-        winCheck.push(boxState[winCon[i][j]]);
-      }
-      if (winCheck.every((val, _i, arr) => val === arr[0])) {
-        if (winCheck[0] === '') {
-          continue;
-        } else if (winCheck[0] === 'p1') {
-          setWinner({ winner: 'p1', winArr: winCon[i] });
-          setScore(prev => {
-            return {
-              ...prev,
-              p1: prev.p1++,
-            };
-          });
+      const [a, b, c] = winCon[i];
+      if (
+        boxState[a] &&
+        boxState[a] === boxState[b] &&
+        boxState[a] === boxState[c]
+      ) {
+        setWinner({ winner: boxState[a], winArr: winCon[i] });
+        if (boxState[a] === 'p1') {
+          setScore(prev => ({
+            ...prev,
+            p1: prev.p1 + 1,
+          }));
         } else {
-          setWinner({ winner: 'p2', winArr: winCon[i] });
-          setScore(prev => {
-            return {
-              ...prev,
-              p2: prev.p2++,
-            };
-          });
+          setScore(prev => ({
+            ...prev,
+            p2: prev.p2 + 1,
+          }));
         }
+        winnerFound = true;
+        break;
       }
     }
-    //checking for a draw
-    if (!boxState.includes('') && winner.winner === '') {
+
+    //dealing with draw
+    if (!winnerFound && !boxState.includes('')) {
       setIsDraw(true);
-      console.log('draw');
+    } else {
+      setIsDraw(false);
     }
   }, [boxState]);
 

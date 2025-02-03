@@ -1,6 +1,8 @@
 import { ReactElement } from 'react';
 import Box from './Box';
 import { useState, useEffect } from 'react';
+import { RxCross2 } from 'react-icons/rx';
+import { FaRegCircle } from 'react-icons/fa';
 
 const TicTacToe = () => {
   const [winner, setWinner] = useState<{
@@ -101,7 +103,9 @@ const TicTacToe = () => {
             <div
               className={`${turn === 'p1' ? '' : 'opacity-20'} p-4 lg:p-8 rounded-xl bg-[#FF4500]`}
             >
-              <p>P1</p>
+              <p>
+                <FaRegCircle />
+              </p>
             </div>
             <div className="p-4 lg:p-8 rounded-xl bg-[#FF4500] opacity-20">
               <p>{score.p1}</p>
@@ -111,7 +115,9 @@ const TicTacToe = () => {
             <div
               className={`${turn === 'p2' ? '' : 'opacity-20'} p-4 lg:p-8 rounded-xl bg-[#19B5FE]`}
             >
-              <p>P2</p>
+              <p>
+                <RxCross2 />
+              </p>
             </div>
             <div className="p-4 lg:p-8 rounded-xl bg-[#19B5FE] opacity-20">
               <p>{score.p2}</p>
@@ -128,7 +134,7 @@ const TicTacToe = () => {
               <p>
                 {isDraw
                   ? 'Draw'
-                  : `${winner.winner.toLocaleUpperCase()} Wins !`}
+                  : `${winner.winner === 'p1' ? 'O' : 'X'} Wins !`}
               </p>
             </div>
             <button

@@ -92,15 +92,8 @@ const MinesweeperGrid = ({ gridInfo }: MinesweeperGridType) => {
       currentBombIndex.forEach(index => {
         newGridTrack[index].isBomb = true;
       });
-      setGridTrack(newGridTrack);
-    }
-  }, [isFirstClick]);
 
-  //use effect for setting the numbers which indicate surrounding bombs
-  useEffect(() => {
-    if (!isFirstClick) {
-      const newGridTrack = [...gridTrack];
-      //adding numbers into grid boxes
+      //adding numbers into grid boxes to identify nearby bombs
       for (let i = 0; i < gridTrack.length; i++) {
         const squareIndexes = getSurroundingIndices(
           i,
@@ -110,9 +103,9 @@ const MinesweeperGrid = ({ gridInfo }: MinesweeperGridType) => {
 
         //seeing if any boxes in the 9x9 grids contain bombs
         let bombs = 0;
-        if (squareIndexes && gridTrack[i].isBomb === false) {
+        if (squareIndexes && newGridTrack[i].isBomb === false) {
           for (let j of squareIndexes) {
-            if (gridTrack[j].isBomb === true) {
+            if (newGridTrack[j].isBomb === true) {
               bombs += 1;
             }
           }
@@ -120,9 +113,10 @@ const MinesweeperGrid = ({ gridInfo }: MinesweeperGridType) => {
 
         newGridTrack[i].number = bombs;
       }
+
       setGridTrack(newGridTrack);
     }
-  }, [gridTrack]);
+  }, [isFirstClick]);
 
   //creating grid display
   const display = [];

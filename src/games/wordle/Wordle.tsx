@@ -146,7 +146,7 @@ const Wordle = () => {
             placeholder="Guess"
             maxLength={5}
             value={currentGuess.word}
-            className="px-2 py-4 rounded-3xl border-2 border-[#59595A] text-2xl"
+            className="px-2 py-4 rounded-3xl border-2 border-[#59595A] text-lg md:text-xl lg:text-2xl"
             onChange={handleKeyUp}
           ></input>
           <button

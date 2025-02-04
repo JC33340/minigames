@@ -3,8 +3,11 @@ import SelectDifficulty from './SelectDifficulty';
 import MinesweeperGrid from './MinesweeperGrid';
 import { TiFlag } from 'react-icons/ti';
 import { TbShovel } from 'react-icons/tb';
+import HoverAnimation from '../../components/hoverAnimation';
 
 type currentButtonType = 'flag' | 'sweep';
+
+type gameStateType = 'win' | 'ongoing' | 'loss';
 
 const MineSweeper = () => {
   //determining if this is the first load
@@ -25,9 +28,17 @@ const MineSweeper = () => {
   const [currentButton, setCurrentButton] =
     useState<currentButtonType>('sweep');
 
+  //keep track of either a win or a loss
+  const [gameState, setGameState] = useState<gameStateType>('ongoing');
+
   //function to change the buttons
   const handleButtonChange = (action: currentButtonType) => {
     setCurrentButton(action);
+  };
+
+  //function to handle game restart
+  const handleRestart = () => {
+    window.location.reload();
   };
 
   return (
@@ -40,7 +51,7 @@ const MineSweeper = () => {
         />
       )}
       {!firstLoad && (
-        <div className="flex flex-col items-center gap-y-4">
+        <div className="flex flex-col items-center gap-y-4 font-mono">
           <div className="flex gap-x-8">
             <button
               onClick={() => handleButtonChange('flag')}
@@ -48,7 +59,7 @@ const MineSweeper = () => {
             >
               <TiFlag className="h-6 w-6 fill-red-500" />
             </button>
-            <div className="bg-black border-2 border-gray-400 px-4 py-2 rounded-lg font-mono">
+            <div className="bg-black border-2 border-gray-400 px-4 py-2 rounded-lg">
               <span className="text-red-500">{remainingBombs}</span>
             </div>
             <button
@@ -58,12 +69,34 @@ const MineSweeper = () => {
               <TbShovel className="h-6 w-6" />
             </button>
           </div>
-          <MinesweeperGrid
-            gridInfo={gridInfo}
-            currentButton={currentButton}
-            remainingBombs={remainingBombs}
-            setRemainingBombs={setRemainingBombs}
-          />
+          <div className="relative ">
+            {gameState === 'loss' && (
+              <div className=" absolute h-full w-full z-20"></div>
+            )}
+            <MinesweeperGrid
+              gridInfo={gridInfo}
+              currentButton={currentButton}
+              remainingBombs={remainingBombs}
+              setRemainingBombs={setRemainingBombs}
+              setGameState={setGameState}
+            />
+          </div>
+          {gameState != 'ongoing' && (
+            <div
+              className={`flex gap-x-4 items-center font-bold ${gameState === 'loss' ? 'text-red-500' : ''}`}
+            >
+              <span>{gameState === 'loss' ? 'Game Over' : 'You Win!'}</span>
+              <HoverAnimation
+                bgColor="bg-black"
+                textColor="text-white"
+                shadow="shadow-[5px_5px_#9aa1ad]"
+              >
+                <button className="" onClick={handleRestart}>
+                  Restart
+                </button>
+              </HoverAnimation>
+            </div>
+          )}
         </div>
       )}
     </div>
@@ -71,4 +104,4 @@ const MineSweeper = () => {
 };
 
 export default MineSweeper;
-export { type currentButtonType };
+export type { currentButtonType, gameStateType };

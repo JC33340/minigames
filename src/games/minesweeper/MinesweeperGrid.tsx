@@ -1,12 +1,13 @@
 import { useState, useEffect, SetStateAction, Dispatch } from 'react';
 import GridBox from './GridBox';
-import type { currentButtonType } from './Minesweeper';
+import type { currentButtonType, gameStateType } from './Minesweeper';
 
 type MinesweeperGridType = {
   gridInfo: { height: number; width: number; cols: string; bombs: number };
   currentButton: currentButtonType;
   setRemainingBombs: Dispatch<SetStateAction<number>>;
   remainingBombs: number;
+  setGameState: Dispatch<SetStateAction<gameStateType>>;
 };
 
 type gridTrackType = {
@@ -21,6 +22,7 @@ const MinesweeperGrid = ({
   currentButton,
   setRemainingBombs,
   remainingBombs,
+  setGameState,
 }: MinesweeperGridType) => {
   //determining if it is the first click
   const [isFirstClick, setFirstClick] = useState(true);
@@ -94,7 +96,13 @@ const MinesweeperGrid = ({
       revealTile(current);
       //if the tile is a number then we are not adding it into the queue, only adding the the set which indicates all that have been revealed
       if (info[current].isBomb) {
-        return alert('Game over');
+        //setting the game state
+        setGameState('loss');
+        //revealing all bombs
+        for (let i = 0; i < gridTrack.length; i++) {
+          if (gridTrack[i].isBomb) revealTile(i);
+        }
+        return;
       } else if (info[current].number) {
         revealed.add(current);
         continue;
@@ -203,6 +211,22 @@ const MinesweeperGrid = ({
       });
     }
   };
+
+  //win checker ?
+  useEffect(() => {
+    let won = false;
+    for (let i = 0; i < gridTrack.length; i++) {
+      if (!gridTrack[i].isBomb && !gridTrack[i].revealed) {
+        break;
+      }
+      if (i === gridTrack.length - 1) {
+        won = true;
+      }
+    }
+    if (won) {
+      setGameState('win');
+    }
+  }, [gridTrack]);
 
   return (
     <div className={`grid ${gridInfo?.cols}`}>

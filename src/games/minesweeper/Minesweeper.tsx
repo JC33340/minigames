@@ -3,7 +3,7 @@ import SelectDifficulty from './SelectDifficulty';
 import MinesweeperGrid from './MinesweeperGrid';
 import { TiFlag } from 'react-icons/ti';
 import { TbShovel } from 'react-icons/tb';
-import HoverAnimation from '../../components/hoverAnimation';
+import HoverAnimation from '../../components/HoverAnimation';
 
 type currentButtonType = 'flag' | 'sweep';
 

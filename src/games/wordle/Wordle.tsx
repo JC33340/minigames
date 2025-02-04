@@ -49,16 +49,24 @@ const Wordle = () => {
       return { alphabet: item, status: '' };
     });
     setAlphabet(alpabetObj);
+    inputRef.current?.focus()
   }, []);
 
   //getting input value and storing it into state
-  function handleKeyUp(e: React.ChangeEvent<HTMLInputElement>) {
+  function handleChange(e: React.ChangeEvent<HTMLInputElement>) {
     setCurrentGuess(prev => {
       return {
         ...prev,
         word: e.target.value,
       };
     });
+  }
+  
+  //handling if enter button is pressed
+  const handleKeyUp = (e:React.KeyboardEvent<HTMLInputElement>) =>{
+    if(e.key==='Enter'){
+      submitGuess()
+    }
   }
 
   //handling user guess submission to change state
@@ -149,12 +157,13 @@ const Wordle = () => {
             maxLength={5}
             value={currentGuess.word}
             className="px-2 py-4 rounded-3xl border-2 border-[#59595A] text-lg md:text-xl lg:text-2xl"
-            onChange={handleKeyUp}
+            onChange={handleChange}
+            onKeyUp={handleKeyUp}
           ></input>
           <button
             disabled={winStatus != 'pending' ? true : false}
             onClick={submitGuess}
-            className="h-fill bg-blue border-2 border-blue text-white relative font-bold px-4 rounded-2xl hover:bg-white hover:text-blue transition-all ease-in-out "
+            className="h-fill bg-blue border-2 border-blue text-white relative font-bold px-4 rounded-2xl hover:translate-x-[-5px] hover:translate-y-[-5px] hover:shadow-[5px_5px_black] transition-all ease-in-out"
           >
             Guess
           </button>
@@ -163,14 +172,15 @@ const Wordle = () => {
           className={`${winStatus != 'pending' ? 'opacity-100' : 'opacity-0'} flex gap-x-2 items-center`}
         >
           <p
-            className={`${winStatus === 'win' ? 'text-[#008000]' : 'text-[#FF0800]'} text-2xl font-bold`}
+            className={`${winStatus === 'win' ? 'text-[#008000]' : ''} text-2xl`}
           >
-            {winStatus === 'win' ? 'You Win!' : `The word was ${currentWord}`}
+            {winStatus === 'win' ? 'You Win!' : `The word was `}
+            <span className='font-bold text-[#d30000]'>{currentWord}</span>
           </p>
           <button
             onClick={restartGame}
             disabled={winStatus != 'pending' ? false : true}
-            className="bg-black rounded-2xl text-white p-4"
+            className="bg-black rounded-2xl text-white p-4 hover:translate-x-[-5px] hover:translate-y-[-5px] hover:shadow-[5px_5px_#528aae] transition-all ease-in-out"
           >
             Restart
           </button>

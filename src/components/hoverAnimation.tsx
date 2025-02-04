@@ -15,7 +15,7 @@ const HoverAnimation = ({
 }: hoverAnimationType) => {
   return (
     <div
-      className={`p-2 rounded-md ${bgColor} ${textColor} ${borderColor} hover:${shadow} hover:translate-x-[-5px] hover:translate-y-[-5px] transition-all ease-in-out`}
+      className={`flex items-center justify-center p-2 rounded-md ${bgColor} ${textColor} ${borderColor} hover:${shadow} hover:translate-x-[-5px] hover:translate-y-[-5px] transition-all ease-in-out`}
     >
       {children}
     </div>

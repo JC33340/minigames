@@ -12,6 +12,7 @@ const AlphabetDisplay = ({
     for (let i of alphabet) {
       alphabetGrid.push(
         <Box
+          key={i.alphabet}
           status={i.status}
           letter={i.alphabet.toUpperCase()}
           className="text-sm rounded-md lg:rounded-md"

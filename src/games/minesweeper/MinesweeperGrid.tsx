@@ -212,10 +212,11 @@ const MinesweeperGrid = ({
     }
   };
 
-  //win checker ?
+  //win checker
   useEffect(() => {
     let won = false;
     for (let i = 0; i < gridTrack.length; i++) {
+      //if a box is not a bomb and has not been revealed then the game is not won yet
       if (!gridTrack[i].isBomb && !gridTrack[i].revealed) {
         break;
       }

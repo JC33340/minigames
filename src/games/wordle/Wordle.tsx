@@ -67,6 +67,9 @@ const Wordle = () => {
     let currentGuessLower = currentGuess.word.toLowerCase();
     if (regex.test(currentGuess.word) && currentGuess.word.length === 5) {
       try {
+        await axios.get(
+          `https://api.dictionaryapi.dev/api/v2/entries/en/${currentGuessLower}`,
+        );
         //changing guess words array to contain new guessed word
         setGuessedWords(prev => {
           const newArr = [...prev];
@@ -114,8 +117,7 @@ const Wordle = () => {
         }
       } catch (error) {
         if (error instanceof AxiosError) {
-          alert('Not an actual word');
-          console.log(error.response?.status);
+          if (error.response?.status === 404) alert('Not an actual word');
         }
       }
     } else {

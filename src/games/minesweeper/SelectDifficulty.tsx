@@ -11,21 +11,26 @@ type SelectDifficultyType = {
       bombs: number;
     }>
   >;
+  setRemainingBombs: Dispatch<SetStateAction<number>>;
 };
 
 const SelectDifficulty = ({
   firstLoadSetter,
   setGridInfo,
+  setRemainingBombs,
 }: SelectDifficultyType) => {
   //function to set difficulty
   const chooseDifficulty = (input: string) => {
     firstLoadSetter(false);
     if (input === 'beginner') {
       setGridInfo({ height: 9, width: 9, cols: 'grid-cols-9', bombs: 10 });
+      setRemainingBombs(10);
     } else if (input === 'intermediate') {
       setGridInfo({ height: 16, width: 16, cols: 'grid-cols-16', bombs: 40 });
+      setRemainingBombs(40);
     } else {
       setGridInfo({ height: 16, width: 30, cols: 'grid-cols-30', bombs: 99 });
+      setRemainingBombs(99);
     }
   };
 

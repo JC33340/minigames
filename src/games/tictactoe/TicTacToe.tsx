@@ -89,7 +89,7 @@ const TicTacToe = () => {
   function restart() {
     setWinner({ winner: '', winArr: undefined });
     changeBoxState(prev => {
-      let newArr: ('' | 'p1' | 'p2')[] = prev.map(item => (item = ''));
+      let newArr: ('' | 'p1' | 'p2')[] = prev.map(_item => '');
       return newArr;
     });
     setIsDraw(false);

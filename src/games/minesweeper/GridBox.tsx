@@ -25,10 +25,10 @@ const GridBox = ({ state, handleClick }: GridBoxType) => {
   return (
     <div
       onClick={handleClick}
-      className={`flex relative items-center justify-center font-bold h-3 text-xs w-3 lg:h-8 lg:w-8 md:h-6 md:w-6 md:text-md lg:text-lg border-2 border-gray-400 cursor-pointer ${textColor} ${state.isBomb ? 'bg-[#ED2939]' : ''}`}
+      className={`flex relative items-center justify-center font-bold text-lg h-8 w-8 border-2 border-gray-400 cursor-pointer ${textColor} ${state.isBomb ? 'bg-[#ED2939]' : ''}`}
     >
       <div
-        className={`h-3 w-3 lg:h-8 lg:w-8 md:h-6 md:w-6 absolute border-2 border-gray-400 bg-gray-200 ${state.revealed ? 'opacity-0' : 'opacity-100'} flex items-center justify-center`}
+        className={`h-8 w-8 absolute border-2 border-gray-400 bg-gray-200 ${state.revealed ? 'opacity-0' : 'opacity-100'} flex items-center justify-center`}
       >
         {state.flagged && <TiFlag className="fill-red-500" />}
       </div>

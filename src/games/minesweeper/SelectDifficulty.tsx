@@ -19,6 +19,8 @@ const SelectDifficulty = ({
   setGridInfo,
   setRemainingBombs,
 }: SelectDifficultyType) => {
+  const windowInnerWidth = window.innerWidth;
+  console.log(windowInnerWidth);
   //function to set difficulty
   const chooseDifficulty = (input: string) => {
     firstLoadSetter(false);
@@ -26,11 +28,30 @@ const SelectDifficulty = ({
       setGridInfo({ height: 9, width: 9, cols: 'grid-cols-9', bombs: 10 });
       setRemainingBombs(10);
     } else if (input === 'intermediate') {
-      setGridInfo({ height: 16, width: 16, cols: 'grid-cols-16', bombs: 40 });
-      setRemainingBombs(40);
+      setGridInfo({
+        height: 16,
+        width: windowInnerWidth < 768 ? 9 : 16,
+        cols: windowInnerWidth < 768 ? 'grid-cols-9' : 'grid-cols-16',
+        bombs: windowInnerWidth < 768 ? 25 : 40,
+      });
+      setRemainingBombs(windowInnerWidth < 768 ? 25 : 40);
     } else {
-      setGridInfo({ height: 16, width: 30, cols: 'grid-cols-30', bombs: 99 });
-      setRemainingBombs(99);
+      setGridInfo({
+        height:
+          windowInnerWidth < 1024 ? (windowInnerWidth < 768 ? 20 : 30) : 16,
+        width: windowInnerWidth < 1024 ? (windowInnerWidth < 768 ? 9 : 20) : 30,
+        cols:
+          windowInnerWidth < 1024
+            ? windowInnerWidth < 768
+              ? 'grid-cols-9'
+              : 'grid-cols-20'
+            : 'grid-cols-30',
+        bombs:
+          windowInnerWidth < 1024 ? (windowInnerWidth < 768 ? 33 : 75) : 99,
+      });
+      setRemainingBombs(
+        windowInnerWidth < 1024 ? (windowInnerWidth < 768 ? 33 : 75) : 99,
+      );
     }
   };
 

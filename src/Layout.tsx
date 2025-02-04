@@ -8,7 +8,7 @@ const Layout = () => {
           Minigames
         </Link>
       </header>
-      <div className="flex items-center justify-center px-20 lg:px-40 py-10">
+      <div className="flex items-center justify-center px-5 lg:px-40 py-10">
         <Outlet />
       </div>
     </div>

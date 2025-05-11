@@ -49,7 +49,7 @@ const Wordle = () => {
       return { alphabet: item, status: '' };
     });
     setAlphabet(alpabetObj);
-    inputRef.current?.focus()
+    inputRef.current?.focus();
   }, []);
 
   //getting input value and storing it into state
@@ -61,13 +61,13 @@ const Wordle = () => {
       };
     });
   }
-  
+
   //handling if enter button is pressed
-  const handleKeyUp = (e:React.KeyboardEvent<HTMLInputElement>) =>{
-    if(e.key==='Enter'){
-      submitGuess()
+  const handleKeyUp = (e: React.KeyboardEvent<HTMLInputElement>) => {
+    if (e.key === 'Enter') {
+      submitGuess();
     }
-  }
+  };
 
   //handling user guess submission to change state
   const submitGuess = async () => {
@@ -175,7 +175,7 @@ const Wordle = () => {
             className={`${winStatus === 'win' ? 'text-[#008000]' : ''} text-2xl`}
           >
             {winStatus === 'win' ? 'You Win!' : `The word was `}
-            <span className='font-bold text-[#d30000]'>{currentWord}</span>
+            <span className="font-bold text-[#d30000]">{currentWord}</span>
           </p>
           <button
             onClick={restartGame}

@@ -3,6 +3,7 @@ import { GiTicTacToe } from 'react-icons/gi';
 import { TbSquareLetterW } from 'react-icons/tb';
 import { FaBomb } from 'react-icons/fa';
 import { BiMath } from 'react-icons/bi';
+import { FaKeyboard } from 'react-icons/fa';
 
 function App() {
   return (
@@ -18,6 +19,9 @@ function App() {
       </GameCard>
       <GameCard title="Maths" url="/maths">
         <BiMath className="h-full w-full" />
+      </GameCard>
+      <GameCard title="Typing" url="/typing">
+        <FaKeyboard className="h-full w-full" />
       </GameCard>
     </div>
   );

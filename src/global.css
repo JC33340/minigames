@@ -8,6 +8,18 @@
   --color-red: #c21807;
 
   --font-orbitron: 'Orbitron', san-serif;
+
+  --animate-flash: flash 1s linear infinite;
+
+  @keyframes flash {
+    0%,
+    75% {
+      border-color: black;
+    }
+    100% {
+      border-color: white;
+    }
+  }
 }
 
 /*

@@ -16,7 +16,7 @@ const Challenge = () => {
   //more in depth animation control
   const [scope, animate] = useAnimate();
   //calculating the current line
-  const group = Math.floor(user.length / 11);
+  const group = Math.floor((user.length - 1) / 10);
   //animating the div to scroll if we have moved on from the current line.
   if (group !== previous.current) {
     const div = containerRef.current;
@@ -43,7 +43,10 @@ const Challenge = () => {
         <motion.div ref={scope}>
           {challengeText.map((item, i) => {
             return (
-              <p key={i}>
+              <p
+                key={i}
+                className='after:content-[""] after:inline-block after:w-full'
+              >
                 {item.map((word, j) => {
                   const index = i * 10 + j;
                   return (

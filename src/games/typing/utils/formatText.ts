@@ -5,7 +5,7 @@ type apiDataType = {
 };
 
 //formatting the text into one big paragraph
-const formatText = (apiData: apiDataType) => {
+const formatText = (apiData: apiDataType): string[][] => {
   let newText = '';
   for (let item of apiData.data) {
     newText += item.content;
